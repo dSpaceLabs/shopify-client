@@ -1,4 +1,4 @@
-Shopify Client
+Shopify Client [![Build Status](https://travis-ci.org/dSpaceLabs/Shopify.svg?branch=master)](https://travis-ci.org/dSpaceLabs/Shopify)
 ==============
 
 PHP Shopify Client
