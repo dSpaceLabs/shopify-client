@@ -1,0 +1,35 @@
+{
+    "name": "dspacelabs/shopify",
+    "description": "Shopify Client",
+    "keywords": ["shopify"],
+    "license": "MIT",
+    "homepage": "https://github.com/dSpaceLabs/Shopify",
+    "authors": [
+        {
+            "name": "Joshua Estes",
+            "homepage": "http://joshuaestes.me"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/dSpaceLabs/Shopify/issues",
+        "source": "https://github.com/dSpaceLabs/Shopify",
+        "docs": "https://github.com/dSpaceLabs/Shopify"
+    },
+    "require": {
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.7",
+        "mockery/mockery": "~1.0@dev"
+    },
+    "autoload": {
+        "psr-4": { "Dspacelabs\\Component\\Shopify\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Dspacelabs\\Component\\Shopify\\Tests\\": "tests/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
