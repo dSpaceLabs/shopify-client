@@ -2,16 +2,35 @@
 /**
  */
 
-namespace Dspace\Component\Shopify;
+namespace Dspacelabs\Component\Shopify;
 
 /**
  */
 class Client
 {
+    /**
+     * @var string
+     */
     protected $key;
+
+    /**
+     * @var string
+     */
     protected $secret;
+
+    /**
+     * @var string
+     */
     protected $shop;
+
+    /**
+     * @var string
+     */
     protected $token;
+
+    /**
+     * @var string
+     */
     protected $scopes;
 
     public function __construct($key, $secret)
