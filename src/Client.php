@@ -33,15 +33,33 @@ class Client
      */
     protected $scopes;
 
+    /**
+     * @param string $key
+     * @param string $secret
+     */
     public function __construct($key, $secret)
     {
         $this->key = $key;
         $this->secret = $secret;
     }
 
+    /**
+     * @param string $shop
+     * @return self
+     */
     public function setShop($shop)
     {
         $this->shop = preg_replace('/\.myshopify\.com/i', '', $shop);
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShop()
+    {
+        return $this->shop;
     }
 
     public function setScopes($scopes)
