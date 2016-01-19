@@ -8,6 +8,23 @@ namespace Dspacelabs\Component\Shopify;
  */
 class Client
 {
+    const SCOPE_READ_CONTENT       = 'read_content';
+    const SCOPE_WRITE_CONTENT      = 'write_content';
+    const SCOPE_READ_THEMES        = 'read_themes';
+    const SCOPE_WRITE_THEMES       = 'write_themes';
+    const SCOPE_READ_PRODUCTS      = 'read_products';
+    const SCOPE_WRITE_PRODUCTS     = 'write_products';
+    const SCOPE_READ_CUSTOMERS     = 'read_customers';
+    const SCOPE_WRITE_CUSTOMERS    = 'write_customers';
+    const SCOPE_READ_ORDERS        = 'read_orders';
+    const SCOPE_WRITE_ORDERS       = 'write_orders';
+    const SCOPE_READ_SCRIPT_TAGS   = 'read_script_tags';
+    const SCOPE_WRITE_SCRIPT_TAGS  = 'write_script_tags';
+    const SCOPE_READ_FULFILLMENTS  = 'read_fulfillments';
+    const SCOPE_WRITE_FULFILLMENTS = 'write_fulfillments';
+    const SCOPE_READ_SHIPPING      = 'read_shipping';
+    const SCOPE_WRITE_SHIPPING     = 'write_shipping';
+
     /**
      * @var string
      */
@@ -34,6 +51,9 @@ class Client
     protected $scopes;
 
     /**
+     * Initialize a shopify client by passing in the API Key and the Secret
+     *
+     * @api
      * @param string $key
      * @param string $secret
      */
@@ -44,6 +64,13 @@ class Client
     }
 
     /**
+     * Set the shopify shop that this is being used for
+     *
+     * Accepted values:
+     * - example
+     * - example.myshopify.com
+     *
+     * @api
      * @param string $shop
      * @return self
      */
@@ -55,16 +82,25 @@ class Client
     }
 
     /**
-     * @return string
+     * Returns the shopify shop that the client is set to. It will return null
+     * if no shopify shop has been set
+     *
+     * @api
+     * @return string|null
      */
     public function getShop()
     {
         return $this->shop;
     }
 
+    /**
+     * @return self
+     */
     public function setScopes($scopes)
     {
         $this->scopes = $scopes;
+
+        return $this;
     }
 
     public function setAccessToken($token)
