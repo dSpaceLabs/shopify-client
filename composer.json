@@ -16,6 +16,7 @@
         "docs": "https://github.com/dSpaceLabs/Shopify"
     },
     "require": {
+        "ext-curl": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.7",
@@ -31,5 +32,8 @@
         "branch-alias": {
             "dev-master": "0.1.x-dev"
         }
+    },
+    "suggest": {
+        "symfony/http-foundation": "Manage request/response/sessions easier"
     }
 }

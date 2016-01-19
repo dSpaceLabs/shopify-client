@@ -5,9 +5,13 @@
 namespace Dspacelabs\Component\Shopify;
 
 /**
+ * Shopify Client
  */
 class Client
 {
+    /**
+     * List of Shopify scopes
+     */
     const SCOPE_READ_CONTENT       = 'read_content';
     const SCOPE_WRITE_CONTENT      = 'write_content';
     const SCOPE_READ_THEMES        = 'read_themes';
@@ -26,27 +30,31 @@ class Client
     const SCOPE_WRITE_SHIPPING     = 'write_shipping';
 
     /**
+     * API Key
+     *
      * @var string
      */
     protected $key;
 
     /**
+     * Secret Key
+     *
      * @var string
      */
     protected $secret;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shop;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $token;
 
     /**
-     * @var string
+     * @var array
      */
     protected $scopes;
 
@@ -59,8 +67,9 @@ class Client
      */
     public function __construct($key, $secret)
     {
-        $this->key = $key;
+        $this->key    = $key;
         $this->secret = $secret;
+        $this->scopes = array();
     }
 
     /**
@@ -94,20 +103,66 @@ class Client
     }
 
     /**
+     * Set all the scopes at once. This WILL overwrite any previous scopes you
+     * had set.
+     *
+     * @api
+     * @param array $scopes
      * @return self
      */
-    public function setScopes($scopes)
+    public function setScopes(array $scopes)
     {
         $this->scopes = $scopes;
 
         return $this;
     }
 
+    /**
+     * Add a scope to the object
+     *
+     * @api
+     * @param string $scope
+     * @return self
+     */
+    public function addScope($scope)
+    {
+        $this->scopes[] = $scope;
+
+        return $this;
+    }
+
+    /**
+     * Returns an array of scopes that have been set
+     *
+     * @api
+     * @return array
+     */
+    public function getScopes()
+    {
+        return $this->scopes;
+    }
+
+    /**
+     * Set the access token to use with requests
+     *
+     * @api
+     * @param string $token
+     * @return self
+     */
     public function setAccessToken($token)
     {
         $this->token = $token;
+
+        return $this;
     }
 
+    /**
+     * Generates the URI used to authorize application
+     *
+     * @param string $redirectUri
+     * @param integer $nonce
+     * @return string
+     */
     public function getAuthorizationUrl($redirectUri, $nonce)
     {
         $url = 'https://';
@@ -115,7 +170,7 @@ class Client
         $url .= '.myshopify.com/admin/oauth/authorize?client_id=';
         $url .= $this->key;
         $url .= '&scope=';
-        $url .= urlencode($this->scopes);
+        $url .= urlencode(implode(',', $this->scopes));
         $url .= '&redirect_uri=';
         $url .= urlencode($redirectUri);
         $url .= '&state=';
@@ -124,6 +179,12 @@ class Client
         return $url;
     }
 
+    /**
+     * Returns the Access Token or false on failure
+     *
+     * @param string $code
+     * @return string|false
+     */
     public function getAccessToken($code)
     {
         if (null != $this->token) {
@@ -154,11 +215,16 @@ class Client
         return $this->token = $response['access_token'];
     }
 
+    /**
+     * @return string
+     */
     public function getBaseUri()
     {
         return 'https://'.$this->shop.'.myshopify.com';
     }
 
+    /**
+     */
     public function call($method, $path, $body = null)
     {
         $method = strtoupper($method);
@@ -204,7 +270,13 @@ class Client
         return $response;
     }
 
-    public function isValid($query)
+    /**
+     * Validates request query
+     *
+     * @param array $query
+     * @return boolean
+     */
+    public function isValid(array $query)
     {
         if (empty($query['hmac']) || empty($query['signature'])) {
             return false;
