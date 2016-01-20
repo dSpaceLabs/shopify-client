@@ -7,6 +7,7 @@ PHP Shopify Client for easy integration into your projects and apps
 - Source code is well documented
 - Heavily tested and maintained
 - Production Shopify Apps are using
+- Maintain a high standard of code quality [![Code Climate](https://codeclimate.com/github/dSpaceLabs/Shopify/badges/gpa.svg)](https://codeclimate.com/github/dSpaceLabs/Shopify)
 
 ## Requirements
 
