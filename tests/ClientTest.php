@@ -43,4 +43,25 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $client->getScopes());
         $this->assertInternalType('array', $client->getScopes());
     }
+
+    public function testBasicAccessToken()
+    {
+        $client = new Client('AccessToken', 'SecretKey');
+
+        $client->setAccessToken('test');
+        $this->assertSame('test', $client->getAccessToken());
+    }
+
+    public function testGetAuthorizationUrl()
+    {
+        $client = new Client('AccessToken', 'SecretKey');
+        $client
+            ->setShop('example.myshopify.com')
+            ->addScope(Client::SCOPE_READ_CUSTOMERS);
+
+        $actual   = $client->getAuthorizationUrl('https://example.com', 1);
+        $expected = 'https://example.myshopify.com/admin/oauth/authorize?client_id=AccessToken&scope=read_customers&redirect_uri=https%3A%2F%2Fexample.com&state=1';
+
+        $this->assertSame($expected, $actual);
+    }
 }

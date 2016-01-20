@@ -182,12 +182,12 @@ class Client
     /**
      * Returns the Access Token or false on failure
      *
-     * @param string $code
+     * @param string|null $code
      * @return string|false
      */
-    public function getAccessToken($code)
+    public function getAccessToken($code = null)
     {
-        if (null != $this->token) {
+        if (null !== $this->token || null === $code) {
             return $this->token;
         }
 
