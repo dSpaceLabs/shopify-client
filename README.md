@@ -11,7 +11,7 @@ PHP Shopify Client for easy integration into your projects and apps
 ## Requirements
 
 - PHP cURL extension
-- PHP >= 5.3
+- PHP >= 5.4
   - See [Travis CI](https://travis-ci.org/dSpaceLabs/Shopify) for builds of each
     version
 - [Shopify Partner Account](https://developers.shopify.com/?ref=dspace)
