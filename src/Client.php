@@ -159,6 +159,7 @@ class Client
     /**
      * Generates the URI used to authorize application
      *
+     * @api
      * @param string $redirectUri
      * @param integer $nonce
      * @return string
@@ -216,6 +217,8 @@ class Client
     }
 
     /**
+     * Returns URI to shop
+     *
      * @return string
      */
     public function getBaseUri()
@@ -224,9 +227,23 @@ class Client
     }
 
     /**
+     * Make a call to Shopify
+     *
+     * @api
+     * @param string $method
+     * @param string $path
+     * @param array|string $body
+     * @return array
      */
     public function call($method, $path, $body = null)
     {
+        /**
+         * This method needs to be refactored and updated so it can be easier
+         * to test. Also it might be a good idea to break out some of this into
+         * more general functions such as get, put, post, etc. to make is a
+         * little easier to understand what's going on
+         */
+
         $method = strtoupper($method);
         $url = $this->getBaseUri().$path;
         $ch = curl_init($url);
@@ -242,7 +259,6 @@ class Client
             curl_setopt($ch, CURLOPT_POSTFIELDS, is_array($body) ? http_build_query($body) : $body);
         } elseif ('GET' === $method && is_array($body) && !empty($body)) {
             $url = sprintf('%s?%s', $url, http_build_query($body));
-            //var_dump($url);
             curl_setopt($ch, CURLOPT_URL, $url);
         }
         $response = json_decode(curl_exec($ch), true);
@@ -255,7 +271,6 @@ class Client
         }
 
         if (isset($response['errors'])) {
-            //var_dump($response);
             if (is_array($response['errors'])) {
                 $msg = array();
                 foreach ($response['errors'] as $k => $v) {
@@ -273,6 +288,7 @@ class Client
     /**
      * Validates request query
      *
+     * @api
      * @param array $query
      * @return boolean
      */
@@ -282,8 +298,7 @@ class Client
             return false;
         }
 
-        $hmac      = $query['hmac'];
-        $signature = $query['signature'];
+        $hmac = $query['hmac'];
 
         unset($query['hmac'], $query['signature']);
 

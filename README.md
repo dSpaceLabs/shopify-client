@@ -8,6 +8,14 @@ PHP Shopify Client for easy integration into your projects and apps
 - Heavily tested and maintained
 - Production Shopify Apps are using
 
+## Requirements
+
+- PHP cURL extension
+- PHP >= 5.3
+  - See [Travis CI](https://travis-ci.org/dSpaceLabs/Shopify) for builds of each
+    version
+- [Shopify Partner Account](https://developers.shopify.com/?ref=dspace)
+
 ## Installation
 
 ```bash
@@ -16,7 +24,11 @@ composer require "dspacelabs/shopify:~0.1@dev"
 
 ## Usage
 
+### Redirect user to Shopify to authorize your application
+
 ```php
+<?php
+
 use Dspacelabs\Component\Shopify\Client;
 
 $client = new Client($accessKey, $secretKey);
@@ -40,7 +52,11 @@ $authorizationUri = $client->getAccessToken('https://example.com/shopify/callbac
 // redirect user to $authorizationUri
 ```
 
+### Shopify redirects user back to your callback url
+
 ```php
+<?php
+
 use Dspacelabs\Component\Shopify\Client;
 
 if (!$session->has('nonce')) {
@@ -61,3 +77,32 @@ $client->setShop('example.myshopify.com');
 // Persist access token in database
 $accessToken = $client->getAccessToken($request->query->get('code'));
 ```
+
+### Making requests to Shopify
+
+```php
+<?php
+
+use Dspacelabs\Component\Shopify\Client;
+
+$client = new Client($accessKey, $secretKey):
+$client
+    ->setShop('example.myshopify.com')
+    ->setAccessToken($accessToken);
+
+$result = $client->call('GET', '/admin/customers.json');
+
+// Process $result
+```
+
+### Recurring application charges
+
+@todo
+
+### Creating and using webhooks
+
+@todo
+
+## Applications using this library
+
+- [Customer Grading](https://apps.shopify.com/customer-grading?utm_source=github&utm_medium=link&utm_campaign=social)
