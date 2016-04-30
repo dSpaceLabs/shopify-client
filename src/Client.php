@@ -59,11 +59,19 @@ class Client
     protected $scopes;
 
     /**
+     * @var boolean
+     */
+    protected $private = false;
+
+    /**
      * Initialize a shopify client by passing in the API Key and the Secret
      *
      * @api
      * @param string $key
+     *   The API Key
      * @param string $secret
+     *   For public apps, this is the secret. If the app is private, this
+     *   is the password that was generated
      */
     public function __construct($key, $secret)
     {
@@ -85,7 +93,21 @@ class Client
      */
     public function setShop($shop)
     {
-        $this->shop = preg_replace('/\.myshopify\.com/i', '', $shop);
+        $this->shop = preg_replace('/https\:\/\//i', '', $shop);
+        $this->shop = preg_replace('/\.myshopify\.com/i', '', $this->shop);
+
+        return $this;
+    }
+
+    /**
+     * Make the Client used for a private app
+     *
+     * @param boolean $private
+     * @return self
+     */
+    public function setPrivate($private)
+    {
+        $this->private = (bool) $private;
 
         return $this;
     }
@@ -223,7 +245,13 @@ class Client
      */
     public function getBaseUri()
     {
-        return 'https://'.$this->shop.'.myshopify.com';
+        $url = 'https://';
+
+        if ($this->private) {
+            $url .= sprintf('%s:%s@', $this->key, $this->secret);
+        }
+
+        return $url.$this->shop.'.myshopify.com';
     }
 
     /**
