@@ -8,6 +8,7 @@ PHP Shopify Client for easy integration into your projects and apps
 - Heavily tested and maintained
 - Production Shopify Apps are using
 - Maintain a high standard of code quality [![Code Climate](https://codeclimate.com/github/dSpaceLabs/Shopify/badges/gpa.svg)](https://codeclimate.com/github/dSpaceLabs/Shopify)
+- Private apps support
 
 ## Requirements
 
@@ -103,6 +104,25 @@ $result = $client->call('GET', '/admin/customers.json');
 ### Creating and using webhooks
 
 @todo
+
+### Private Apps
+
+See [Generate private app credentials](https://help.shopify.com/api/guides/api-credentials#generate-private-app-credentials).
+
+```php
+<?php
+
+use Dspacelabs\Component\Shopify\Client;
+
+/**
+ * The API Key and Password are generated for you on Shopify once you create
+ * Your private app. Those are the credentials you need here.
+ * /
+$client = new Client($apiKey, $password):
+$client
+    ->setPrivate(true)
+    ->setShop('example.myshopify.com');
+```
 
 ## Applications using this library
 
