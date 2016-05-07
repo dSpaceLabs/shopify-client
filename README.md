@@ -117,7 +117,7 @@ use Dspacelabs\Component\Shopify\Client;
 /**
  * The API Key and Password are generated for you on Shopify once you create
  * Your private app. Those are the credentials you need here.
- * /
+ */
 $client = new Client($apiKey, $password):
 $client
     ->setPrivate(true)
