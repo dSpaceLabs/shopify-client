@@ -126,4 +126,4 @@ $client
 
 ## Applications using this library
 
-- [Customer Grading](https://apps.shopify.com/customer-grading?utm_source=github&utm_medium=link&utm_campaign=social)
+- [lvl67](http://www.lvl67.com)
