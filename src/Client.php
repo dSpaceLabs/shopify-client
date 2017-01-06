@@ -322,7 +322,7 @@ class Client
      */
     public function isValid(array $query)
     {
-        if (empty($query['hmac']) || empty($query['signature'])) {
+        if (empty($query['hmac'])) {
             return false;
         }
 

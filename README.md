@@ -34,11 +34,9 @@ composer require "dspacelabs/shopify:~0.1@dev"
 use Dspacelabs\Component\Shopify\Client;
 
 $client = new Client($accessKey, $secretKey);
-if (!$client->isValid($request->query->all())) {
-    throw new AccessDeniedError();
-}
-
-$client->setShop('example.myshopify.com'); // `example` is also acceptable
+$client->setShop('example.myshopify.com');
+// This is the same thing as doing the entire domain
+//$client->setShop('example');
 
 // List of scopes can be in the Client class
 $client->setScopes(
@@ -66,6 +64,7 @@ if (!$session->has('nonce')) {
 }
 
 $client = new Client($accessKey, $secretKey);
+$client->setShop('example.myshopify.com');
 
 // `isValid` takes array of query parameters, think $_GET, $_POST, etc.
 // This example is using a Request object from the symfony/http-foundation
@@ -73,8 +72,6 @@ $client = new Client($accessKey, $secretKey);
 if (!$client->isValid($request->query->all())) {
     throw new \AccessDeniedError();
 }
-
-$client->setShop('example.myshopify.com');
 
 // Persist access token in database
 $accessToken = $client->getAccessToken($request->query->get('code'));
