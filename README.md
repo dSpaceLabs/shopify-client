@@ -50,7 +50,7 @@ $client->setScopes(
 
 $nonce = time(); // Save in session, used in callback action
 
-$authorizationUri = $client->getAccessToken('https://example.com/shopify/callback', $nonce);
+$authorizationUri = $client->getAuthorizationUrl('https://example.com/shopify/callback', $nonce);
 // redirect user to $authorizationUri
 ```
 
