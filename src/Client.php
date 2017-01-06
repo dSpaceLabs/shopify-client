@@ -328,7 +328,7 @@ class Client
 
         $hmac = $query['hmac'];
 
-        unset($query['hmac'], $query['signature']);
+        unset($query['hmac']);
 
         ksort($query);
 
