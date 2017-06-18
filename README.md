@@ -21,7 +21,7 @@ PHP Shopify Client for easy integration into your projects and apps
 ## Installation
 
 ```bash
-composer require "dspacelabs/shopify:~0.1@dev"
+composer require "dspacelabs/shopify:^1.0@dev"
 ```
 
 ## Usage
