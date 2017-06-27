@@ -4,7 +4,7 @@ namespace Dspacelabs\Component\Shopify\Tests;
 
 use Dspacelabs\Component\Shopify\Client;
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+class ClientTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider shopSuccessProvider

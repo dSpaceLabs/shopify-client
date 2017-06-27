@@ -9,7 +9,7 @@ use Dspacelabs\Component\Http\Client\Client as BaseClient;
 /**
  * Shopify Client
  */
-class Client
+class Client extends BaseClient
 {
     /**
      * List of Shopify scopes
