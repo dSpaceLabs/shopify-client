@@ -4,6 +4,8 @@
 
 namespace Dspacelabs\Component\Shopify;
 
+use Dspacelabs\Component\Http\Client\Client as BaseClient;
+
 /**
  * Shopify Client
  */
