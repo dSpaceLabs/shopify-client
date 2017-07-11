@@ -16,7 +16,9 @@
         "docs": "https://github.com/dSpaceLabs/Shopify"
     },
     "require": {
-        "dspacelabs/http-client": "^0.1"
+        "dspacelabs/http-client": "^0.1",
+        "guzzlehttp/guzzle": "^6.0",
+        "psr/log": "^1.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.9",
